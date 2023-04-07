@@ -1,18 +1,18 @@
 {
-  "name": "my-extension",
-  "displayName": "My-Extension",
-  "displayName:zh-CN": "我的扩展",
-  "version": "0.1.0",
-  "description": "try to take over the world!",
-  "description:zh-CN": "让世界更美好！",
-  "author": "You",
-  "namespace": "https://github.com/utags/browser-extension-starter",
-  "icon": "https://www.tampermonkey.net/favicon.ico",
+  "name": "v2ex.min",
+  "displayName": "v2ex.min - V2EX 极简风格",
+  "displayName:zh-CN": "v2ex.min - V2EX 极简风格",
+  "version": "0.0.1",
+  "description": "V2EX 极简风格，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像。",
+  "description:zh-CN": "V2EX 极简风格，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像。",
+  "author": "Pipecraft",
+  "namespace": "https://github.com/v2hot/v2ex.min",
+  "icon": "https://www.v2ex.com/favicon.ico",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/utags/browser-extension-starter/issues"
+    "url": "https://github.com/v2hot/v2ex.min/issues"
   },
-  "homepage": "https://github.com/utags/browser-extension-starter#readme",
+  "homepage": "https://github.com/v2hot/v2ex.min#readme",
   "scripts": {
     "p": "prettier --write .",
     "lint": "run-s lint:*",
