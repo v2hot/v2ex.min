@@ -5,13 +5,16 @@ import {
 } from "browser-extension-storage"
 import {
   $,
+  $$,
   addElement,
   addEventListener,
   addStyle,
+  createElement,
   registerMenuCommand,
   removeEventListener,
 } from "browser-extension-utils"
 import enhanceNodeName from "data-text:../v2ex-custom-style/enhance-node-name.css"
+import hideLastReplier from "data-text:../v2ex-custom-style/hide-last-replier.css"
 import hideProfilePhotoStyle from "data-text:../v2ex-custom-style/hide-profile-photo.css"
 import minimalist from "data-text:../v2ex-custom-style/minimalist.css"
 import noAds from "data-text:../v2ex-custom-style/no-ads.css"
@@ -49,6 +52,10 @@ const settingsTable = {
     title: "隐藏用户头像",
     defaultValue: false,
   },
+  hideLastReplier: {
+    title: "隐藏最后回复者",
+    defaultValue: false,
+  },
   customStyle: {
     title: "自定义样式",
     defaultValue: false,
@@ -83,6 +90,10 @@ const modalHandler = (event) => {
 }
 
 async function updateOptions() {
+  if (!$("#v2min_settings")) {
+    return
+  }
+
   for (const key in settingsTable) {
     if (Object.hasOwn(settingsTable, key)) {
       const checkbox = $(
@@ -227,6 +238,17 @@ async function addStyles() {
     styles.push(hideProfilePhotoStyle)
   }
 
+  if (getSettingsValue("hideLastReplier")) {
+    for (const element of $$("#Main .topic_info strong:nth-of-type(2)")) {
+      if (element.previousSibling.nodeName === "SPAN") continue
+      const span = createElement("span", { class: "last_replier_text" })
+      span.append(element.previousSibling)
+      element.before(span)
+    }
+
+    styles.push(hideLastReplier)
+  }
+
   if (getSettingsValue("hidePinnedTopics")) {
     styles.push(`/* Hide pinned topics */
     #Main > div:nth-child(2) > div[style*="corner"] {
@@ -300,7 +322,6 @@ async function addStyles() {
 async function getSettings() {
   const settings =
     ((await getValue("settings")) as Record<string, unknown> | undefined) || {}
-  console.log(settings)
   return settings
 }
 
@@ -320,6 +341,7 @@ async function main() {
 
   settings = await getSettings()
   await addStyles()
+  addEventListener(document, "DOMContentLoaded", addStyles)
 }
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises, unicorn/prefer-top-level-await
