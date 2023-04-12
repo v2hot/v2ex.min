@@ -5,7 +5,7 @@
 // @namespace            https://github.com/v2hot/v2ex.min
 // @homepage             https://github.com/v2hot/v2ex.min#readme
 // @supportURL           https://github.com/v2hot/v2ex.min/issues
-// @version              0.1.0
+// @version              0.1.1
 // @description          V2EX 极简风格，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
 // @description:en       V2EX minimalist style，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
 // @description:zh-CN    V2EX 极简风格，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
@@ -24,6 +24,12 @@
 // @grant                GM_registerMenuCommand
 // ==/UserScript==
 //
+//// Recent Updates
+//// - 0.1.1 2023.04.12
+////    - 修改去除页面背景色逻辑
+//// - 0.1.0 2023.04.11
+////    - 添加自定义功能选项，自定义样式功能
+////
 ;(() => {
   "use strict"
   var getValue = (key) => {
@@ -169,10 +175,6 @@
       title: "\u6781\u7B80\u98CE\u683C",
       defaultValue: true,
     },
-    bodyBackgroundColor: {
-      title: "\u9875\u9762\u80CC\u666F\u8272",
-      defaultValue: true,
-    },
     stickyHeader: {
       title: "\u5BFC\u822A\u680F\u9876\u90E8\u56FA\u5B9A",
       defaultValue: true,
@@ -184,6 +186,10 @@
     enhanceNodeName: {
       title: "\u589E\u5F3A\u663E\u793A\u8282\u70B9\u540D",
       defaultValue: true,
+    },
+    bodyBackgroundColor: {
+      title: "\u53BB\u9664\u9875\u9762\u80CC\u666F\u8272",
+      defaultValue: false,
     },
     hidePinnedTopics: {
       title: "\u9690\u85CF\u7F6E\u9876\u5E16\u5B50",
@@ -335,7 +341,7 @@ body #Wrapper.Night {
     if (getSettingsValue("minimalist")) {
       styles.push(minimalist_default)
     }
-    if (getSettingsValue("bodyBackgroundColor")) {
+    if (!getSettingsValue("bodyBackgroundColor")) {
       styles.push(`
     body #Wrapper {
       background-color: #f0f0f0;
