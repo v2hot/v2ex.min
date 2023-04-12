@@ -25,10 +25,6 @@ const settingsTable = {
     title: "极简风格",
     defaultValue: true,
   },
-  bodyBackgroundColor: {
-    title: "页面背景色",
-    defaultValue: true,
-  },
   stickyHeader: {
     title: "导航栏顶部固定",
     defaultValue: true,
@@ -40,6 +36,10 @@ const settingsTable = {
   enhanceNodeName: {
     title: "增强显示节点名",
     defaultValue: true,
+  },
+  bodyBackgroundColor: {
+    title: "去除页面背景色",
+    defaultValue: false,
   },
   hidePinnedTopics: {
     title: "隐藏置顶帖子",
@@ -208,7 +208,7 @@ async function addStyles() {
     styles.push(minimalist)
   }
 
-  if (getSettingsValue("bodyBackgroundColor")) {
+  if (!getSettingsValue("bodyBackgroundColor")) {
     styles.push(`
     body #Wrapper {
       background-color: #f0f0f0;
