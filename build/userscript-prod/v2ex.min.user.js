@@ -5,7 +5,7 @@
 // @namespace            https://github.com/v2hot/v2ex.min
 // @homepageURL          https://github.com/v2hot/v2ex.min#readme
 // @supportURL           https://github.com/v2hot/v2ex.min/issues
-// @version              0.1.1
+// @version              0.1.3
 // @description          V2EX 极简风格，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
 // @description:en       V2EX minimalist style，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
 // @description:zh-CN    V2EX 极简风格，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
@@ -25,6 +25,8 @@
 // ==/UserScript==
 //
 //// Recent Updates
+//// - 0.1.3 2023.04.12
+////    - 隐藏最后回复者
 //// - 0.1.1 2023.04.12
 ////    - 修改去除页面背景色逻辑
 //// - 0.1.0 2023.04.11
@@ -78,6 +80,9 @@
   }
   var doc = document
   var $ = (selectors, element) => (element || doc).querySelector(selectors)
+  var $$ = (selectors, element) => [
+    ...(element || doc).querySelectorAll(selectors),
+  ]
   var createElement = (tagName, attributes) =>
     setAttributes(doc.createElement(tagName), attributes)
   var addElement = (parentNode, tagName, attributes) => {
@@ -216,6 +221,8 @@
   }
   var enhance_node_name_default =
     "#Main .box a.node{color:#1ba784}#Main td:has(.topic_info){display:flex;flex-direction:column-reverse}div.cell:has(.topic_info){border-bottom:5px solid var(--box-border-color)}"
+  var hide_last_replier_default =
+    "#Main .topic_info strong:nth-of-type(2),#Main .topic_info .last_replier_text{display:none}#Main .cell:hover .topic_info strong:nth-of-type(2),#Main .cell:hover .topic_info .last_replier_text{display:contents}"
   var hide_profile_photo_default =
     '#Main td:has(a>img.avatar),#Main td:has(a>img.avatar)+td[width="10"],#Main td[width="48"],#Main td[width="48"]+td[width="10"],#TopicsHot td:has(a>img.avatar),#TopicsHot td:has(a>img.avatar)+td,#my-recent-topics td:has(a>img),#my-recent-topics td:has(a>img)+td,#Main>box>div.cell[id] td:has(img.avatar),#Main>box>div.cell[id] td:has(img.avatar)+td{display:none !important}td>strong>.dark{color:#1ba784 !important}'
   var minimalist_default =
@@ -276,6 +283,10 @@
       title: "\u9690\u85CF\u7528\u6237\u5934\u50CF",
       defaultValue: false,
     },
+    hideLastReplier: {
+      title: "\u9690\u85CF\u6700\u540E\u56DE\u590D\u8005",
+      defaultValue: false,
+    },
     customStyle: {
       title: "\u81EA\u5B9A\u4E49\u6837\u5F0F",
       defaultValue: false,
@@ -308,6 +319,9 @@
     }
   }
   async function updateOptions() {
+    if (!$("#v2min_settings")) {
+      return
+    }
     for (const key in settingsTable) {
       if (Object.hasOwn(settingsTable, key)) {
         const checkbox = $(
@@ -434,6 +448,15 @@ body #Wrapper.Night {
     if (getSettingsValue("hideProfilePhoto")) {
       styles.push(hide_profile_photo_default)
     }
+    if (getSettingsValue("hideLastReplier")) {
+      for (const element of $$("#Main .topic_info strong:nth-of-type(2)")) {
+        if (element.previousSibling.nodeName === "SPAN") continue
+        const span = createElement("span", { class: "last_replier_text" })
+        span.append(element.previousSibling)
+        element.before(span)
+      }
+      styles.push(hide_last_replier_default)
+    }
     if (getSettingsValue("hidePinnedTopics")) {
       styles.push(`/* Hide pinned topics */
     #Main > div:nth-child(2) > div[style*="corner"] {
@@ -496,7 +519,6 @@ body #Wrapper.Night {
   }
   async function getSettings() {
     const settings2 = (await getValue("settings")) || {}
-    console.log(settings2)
     return settings2
   }
   async function main() {
@@ -512,6 +534,7 @@ body #Wrapper.Night {
     })
     settings = await getSettings()
     await addStyles()
+    addEventListener(document, "DOMContentLoaded", addStyles)
   }
   main()
 })()

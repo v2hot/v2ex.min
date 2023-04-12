@@ -10,6 +10,7 @@ V2EX minimalist style，扁平化 UI，导航栏顶部固定，去除背景图�
 
 - ✅ 自定义功能选项
 - ✅ 自定义样式
+- ✅ 隐藏最后回复者
 - Theme 切换
 
 ## About
