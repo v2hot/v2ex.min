@@ -18,10 +18,12 @@ import hideLastReplier from "data-text:../v2ex-custom-style/hide-last-replier.cs
 import hideProfilePhotoStyle from "data-text:../v2ex-custom-style/hide-profile-photo.css"
 import minimalist from "data-text:../v2ex-custom-style/minimalist.css"
 import noAds from "data-text:../v2ex-custom-style/no-ads.css"
+import sideNavStyle from "data-text:../v2ex-custom-style/side-nav.scss"
 import stickyHeader from "data-text:../v2ex-custom-style/sticky-header.css"
 import styleText from "data-text:./content.scss"
 import type { PlasmoCSConfig } from "plasmo"
 
+import { showSideNav } from "./components/side-nav"
 import { createSwitchOption } from "./components/switch"
 
 export const config: PlasmoCSConfig = {
@@ -43,6 +45,10 @@ const settingsTable = {
   },
   enhanceNodeName: {
     title: "增强显示节点名",
+    defaultValue: true,
+  },
+  showSideNav: {
+    title: "显示快捷按钮",
     defaultValue: true,
   },
   bodyBackgroundColor: {
@@ -67,7 +73,7 @@ const settingsTable = {
   },
 }
 let settings = {}
-function getSettingsValue(key: string): boolean | undefined {
+export function getSettingsValue(key: string): boolean | undefined {
   return Object.hasOwn(settings, key)
     ? settings[key]
     : settingsTable[key]?.defaultValue
@@ -117,7 +123,7 @@ async function updateOptions() {
   customStyleValue.value = settings.customStyleValue || ""
 }
 
-async function showSettings() {
+export async function showSettings() {
   let settingsLayer = $("#v2min_settings")
   if (!settingsLayer) {
     addStyle(styleText)
@@ -195,6 +201,7 @@ body #Wrapper.Night {
           hidePinnedTopics: false,
           hideProfilePhoto: false,
           customStyle: false,
+          showSideNav: false,
         })
       },
     })
@@ -254,6 +261,11 @@ async function addStyles() {
     styles.push(hideLastReplier)
   }
 
+  if (getSettingsValue("showSideNav")) {
+    styles.push(sideNavStyle)
+    showSideNav()
+  }
+
   if (getSettingsValue("hidePinnedTopics")) {
     styles.push(`/* Hide pinned topics */
     #Main > div:nth-child(2) > div[style*="corner"] {
@@ -293,6 +305,7 @@ async function addStyles() {
 
     #Tabs > a {
       min-width: 3.5em;
+      text-align: center;
     }
     `)
   }
