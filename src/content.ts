@@ -285,6 +285,12 @@ async function addStyles() {
       display: none !important;
     }
 
+    /* 我收藏的节点 */
+    .box:has(#nodes-sidebar),
+    .box:has(#nodes-sidebar) + .sep20 {
+      display: none;
+    }
+
     /* 节点导航 */
     .box:has(a[href="/planes"]) {
       display: none;
