@@ -28,6 +28,8 @@ import { createSwitchOption } from "./components/switch"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://*.v2ex.com/*", "https://v2hot.pipecraft.net/*"],
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  run_at: "document_start",
 }
 
 const settingsTable = {
