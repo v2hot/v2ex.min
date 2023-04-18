@@ -1,6 +1,6 @@
 # v2ex.min - V2EX 极简风格
 
-V2EX 极简风格，扁平化 UI，导航栏顶部固定，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
+V2EX 极简风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
 
 ![screenshots](assets/v2ex.min-screenshots-01.png)
 ![screenshots](assets/v2ex.min-screenshots-02.png)
@@ -10,14 +10,14 @@ V2EX 极简风格，扁平化 UI，导航栏顶部固定，去除背景图片，
 
 ## Installation
 
-- Chrome Extension: TBD
-- Firefox Addon: TBD
+- Chrome Extension: [Manual Installation](manual-installation.md)
+- Edge Extension: [Manual Installation](manual-installation.md)
+- Firefox Addon: [Manual Installation](manual-installation.md)
 - Userscript: [https://greasyfork.org/scripts/463552-v2ex-min](https://greasyfork.org/scripts/463552-v2ex-min)
-- [Manual Installation](manual-installation.md)
 
 ## Development
 
-This extension/userscript built from [Browser Extension Starter and Userscript Starter](https://github.com/PipecraftNet/browser-extension-starter)
+This extension/userscript is built from [Browser Extension Starter and Userscript Starter](https://github.com/PipecraftNet/browser-extension-starter)
 
 ## Features
 
