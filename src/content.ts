@@ -20,8 +20,13 @@ import minimalist from "data-text:../v2ex-custom-style/minimalist.css"
 import noAds from "data-text:../v2ex-custom-style/no-ads.css"
 import stickyHeader from "data-text:../v2ex-custom-style/sticky-header.css"
 import styleText from "data-text:./content.scss"
+import type { PlasmoCSConfig } from "plasmo"
 
 import { createSwitchOption } from "./components/switch"
+
+export const config: PlasmoCSConfig = {
+  matches: ["https://*.v2ex.com/*", "https://v2hot.pipecraft.net/*"],
+}
 
 const settingsTable = {
   minimalist: {
