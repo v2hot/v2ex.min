@@ -222,7 +222,7 @@ body #Wrapper.Night {
 }
 
 async function addStyles() {
-  const styles = []
+  const styles: string[] = []
   styles.push(noAds)
 
   if (getSettingsValue("stickyHeader")) {
@@ -346,9 +346,9 @@ async function addStyles() {
 }
 
 async function getSettings() {
-  const settings =
-    ((await getValue("settings")) as Record<string, unknown> | undefined) || {}
-  return settings
+  return (
+    ((await getValue("settings")) as Record<string, unknown> | undefined) ?? {}
+  )
 }
 
 async function main() {
