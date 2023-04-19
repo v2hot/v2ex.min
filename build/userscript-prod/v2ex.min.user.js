@@ -5,10 +5,10 @@
 // @namespace            https://github.com/v2hot/v2ex.min
 // @homepageURL          https://github.com/v2hot/v2ex.min#readme
 // @supportURL           https://github.com/v2hot/v2ex.min/issues
-// @version              0.1.4
-// @description          V2EX 极简风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
-// @description:en       V2EX minimalist style，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
-// @description:zh-CN    V2EX 极简风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
+// @version              0.1.5
+// @description          V2EX 极简风格，简洁风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
+// @description:en       V2EX minimalist style，简洁风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
+// @description:zh-CN    V2EX 极简风格，简洁风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
 // @icon                 https://www.v2ex.com/favicon.ico
 // @author               Pipecraft
 // @license              MIT
@@ -25,6 +25,8 @@
 // ==/UserScript==
 //
 //// Recent Updates
+//// - 0.1.5 2023.04.19
+////    - 修改按钮样式
 //// - 0.1.4 2023.04.18
 ////    - 显示快捷按钮
 //// - 0.1.3 2023.04.12
@@ -344,6 +346,7 @@
   }
   var config = {
     matches: ["https://*.v2ex.com/*", "https://v2hot.pipecraft.net/*"],
+    run_at: "document_start",
   }
   var settingsTable = {
     minimalist: {
@@ -574,6 +577,11 @@ body #Wrapper.Night {
     #TopicsHot + div + div + div + div + div + div {
       display: none !important;
     }
+    /* \u6211\u6536\u85CF\u7684\u8282\u70B9 */
+    .box:has(#nodes-sidebar),
+    .box:has(#nodes-sidebar) + .sep20 {
+      display: none;
+    }
     /* \u8282\u70B9\u5BFC\u822A */
     .box:has(a[href="/planes"]) {
       display: none;
@@ -619,8 +627,8 @@ body #Wrapper.Night {
     if ($("#Tabs")) $("#Tabs").style.display = "block"
   }
   async function getSettings() {
-    const settings2 = (await getValue("settings")) || {}
-    return settings2
+    var _a
+    return (_a = await getValue("settings")) != null ? _a : {}
   }
   async function main() {
     if (document["v2ex.min"]) {
