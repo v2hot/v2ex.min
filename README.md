@@ -17,7 +17,7 @@ V2EX 极简风格，简洁风格，扁平化 UI，导航栏顶部固定，快捷
 
 ## Development
 
-This extension/userscript is built from [Browser Extension Starter and Userscript Starter](https://github.com/PipecraftNet/browser-extension-starter)
+This extension/userscript is built from [Browser Extension Starter and Userscript Starter](https://github.com/utags/browser-extension-starter)
 
 ## Features
 

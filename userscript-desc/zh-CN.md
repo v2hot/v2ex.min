@@ -6,13 +6,18 @@ V2EX 极简风格，简洁风格，扁平化 UI，导航栏顶部固定，快捷
 
 > ⚠️ Firefox 浏览器需要启用 `layout.css.has-selector.enabled`。访问 `about:config`，把 `layout.css.has-selector.enabled` 设置为 `true`。
 
-## TODO
+## Features
 
-- ✅ 自定义功能选项
+- ✅ 极简风格，简洁风格，扁平化 UI
+- ✅ 导航栏顶部固定
+- ✅ 去除背景图片
+- ✅ 支持隐藏头像
+- ✅ 打开设置可以自定义功能选项
 - ✅ 自定义样式
 - ✅ 隐藏最后回复者
 - ✅ 快捷按钮
-- Theme 切换
+- ✅ 去除广告，去除不必要元素
+- ✅ 支持黑暗模式
 
 ## 截图
 
@@ -39,10 +44,11 @@ V2EX 极简风格，简洁风格，扁平化 UI，导航栏顶部固定，快捷
 - Repository: [https://github.com/v2hot/v2ex.min](https://github.com/v2hot/v2ex.min)
 - Feedback: [https://github.com/v2hot/v2ex.min/issues](https://github.com/v2hot/v2ex.min/issues)
 
-## Other Userscripts
+## 其他使 V2EX 更好用的脚本
 
 - [🏷️ 小鱼标签 (UTags) - 为链接添加用户标签，支持 V2EX](https://greasyfork.org/scripts/460718-utags-add-usertags-to-links)
-- [Hacker News 网站切换器](https://greasyfork.org/scripts/462865-hacker-news-apps-switcher)
+- [V2EX.REP - 专注提升 V2EX 主题回复浏览体验](https://greasyfork.org/scripts/466589-v2ex-rep) - 专注提升 V2EX 主题回复浏览体验的浏览器扩展/用户脚本。主要功能有 ✅ 修复有被 block 的用户时错位的楼层号；✅ 回复时自动带上楼层号；✅ 显示热门回复；✅ 显示被引用的回复；✅ 查看用户在当前主题下的所有回复与被提及的回复；✅ 自动预加载所有分页，支持解析显示跨页面引用；✅ 回复时上传图片；✅ 无感自动签到；✅ 懒加载用户头像图片；✅ 一直显示感谢按钮 🙏；✅ 一直显示隐藏回复按钮 🙈；✅ 快速发送感谢/快速隐藏回复（no confirm）等。
+- [🔗 链接助手](https://greasyfork.org/scripts/464541-links-helper) - 支持所有网站在新标签页中打开第三方网站链接（外链），在新标签页中打开符合指定规则的本站链接，解析文本链接为超链接，微信公众号文本转可点击的超链接，图片链接转图片标签，解析 Markdown 格式链接与图片标签
 
 ## License
 
