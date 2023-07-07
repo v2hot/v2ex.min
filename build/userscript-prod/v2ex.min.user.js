@@ -5,7 +5,7 @@
 // @namespace            https://github.com/v2hot/v2ex.min
 // @homepageURL          https://github.com/v2hot/v2ex.min#readme
 // @supportURL           https://github.com/v2hot/v2ex.min/issues
-// @version              0.1.5
+// @version              0.1.6
 // @description          V2EX 极简风格，简洁风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
 // @description:en       V2EX minimalist style，简洁风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
 // @description:zh-CN    V2EX 极简风格，简洁风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。
@@ -236,7 +236,7 @@
   var side_nav_default =
     '#v2min_sideNav{--background-color: #000;--button-color: #aaa;--button-hover-color: #fff;--button-separator-color: #999;position:fixed;display:flex !important;bottom:0px;right:0px;background-color:var(--background-color);opacity:75%;border-top-left-radius:6px}#v2min_sideNav button{color:var(--button-color);font-size:18px;width:30px;height:30px;background-color:unset;border:none;position:relative}#v2min_sideNav button:hover{color:var(--button-hover-color)}#v2min_sideNav button:disabled{color:#778087;opacity:50%}#v2min_sideNav button::after{content:"";border-left:1px solid var(--button-separator-color);position:absolute;bottom:10px;right:-1px;width:1px;height:10px}#v2min_sideNav button:last-of-type::after{display:none}#v2min_sideNav button.fa-chevron-left,#v2min_sideNav button.fa-chevron-right,#v2min_sideNav button.fa-bell{font-size:14px}'
   var sticky_header_default =
-    '#Top{position:fixed;top:0;width:100%;box-sizing:border-box}#Top .content{max-width:unset !important;width:100% !important}.site-nav .tools{flex:unset}.site-nav a[name=top]{margin-right:auto}#Wrapper::before{content:"";display:block;height:44px}#placeholder{height:38px}#Tabs{position:fixed;top:1px;padding:9px;border:none}#search-container{width:100px}#search-container:has(input:focus){width:300px}body:has(input:focus) #Tabs{display:none}@media only screen and (max-width: 1300px){.site-nav a[name=top]{visibility:hidden}}body{scroll-margin-top:44px}'
+    '#Top{position:fixed;top:0;width:100%;box-sizing:border-box}#Top .content{max-width:unset !important;width:100% !important}.site-nav .tools{flex:unset}.site-nav a[name=top]{margin-right:auto}#Wrapper::before{content:"";display:block;height:44px}#placeholder{height:38px}#Tabs{position:fixed;top:1px;padding:9px;border:none}#search-container{width:100px}#search-container:has(input:focus){width:300px}body:has(input:focus) #Tabs{display:none}@media only screen and (max-width: 1300px){.site-nav a[name=top]{visibility:hidden}}*{scroll-margin-top:44px}'
   var content_default =
     "#v2min_settings{position:fixed;top:10px;right:30px;min-width:250px;max-height:90%;overflow-y:auto;overflow-x:hidden;display:none;box-sizing:border-box;padding:10px 15px;background-color:#f3f3f3;z-index:100000;border-radius:5px;-webkit-box-shadow:0px 10px 39px 10px rgba(62,66,66,.22);-moz-box-shadow:0px 10px 39px 10px rgba(62,66,66,.22);box-shadow:0px 10px 39px 10px rgba(62,66,66,.22) !important}#v2min_settings h2{text-align:center;margin:5px 0 0;font-size:18px;font-weight:600;border:none}#v2min_settings footer{text-align:center;font-size:11px;margin:10px auto 0px}#v2min_settings footer a{color:#217dfc}#v2min_settings .option_groups{background-color:#fff;padding:6px 0 6px 15px;border-radius:10px;display:flex;flex-direction:column;margin:10px 0 0}#v2min_settings .option_groups .action{font-size:14px;border-top:1px solid #ccc;padding:6px 15px 6px 0;color:#217dfc;cursor:pointer}#v2min_settings .option_groups:nth-of-type(2){display:none}#v2min_settings .option_groups textarea{margin:10px 15px 10px 0;height:200px;width:300px;border:1px solid #a9a9a9}#v2min_settings .switch_option{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #ccc;padding:6px 15px 6px 0;font-size:14px}#v2min_settings .switch_option:first-of-type,#v2min_settings .option_groups .action:first-of-type{border-top:none}#v2min_settings .container{--button-width: 51px;--button-height: 24px;--toggle-diameter: 20px;--color-off: #e9e9eb;--color-on: #34c759;width:var(--button-width);height:var(--button-height);position:relative}#v2min_settings input[type=checkbox]{opacity:0;width:0;height:0;position:absolute}#v2min_settings .switch{width:100%;height:100%;display:block;background-color:var(--color-off);border-radius:calc(var(--button-height)/2);cursor:pointer;transition:all .2s ease-out}#v2min_settings .slider{width:var(--toggle-diameter);height:var(--toggle-diameter);position:absolute;left:2px;top:calc(50% - var(--toggle-diameter)/2);border-radius:50%;background:#fff;box-shadow:0px 3px 8px rgba(0,0,0,.15),0px 3px 1px rgba(0,0,0,.06);transition:all .2s ease-out;cursor:pointer}#v2min_settings input[type=checkbox]:checked+.switch{background-color:var(--color-on)}#v2min_settings input[type=checkbox]:checked+.switch .slider{left:calc(var(--button-width) - var(--toggle-diameter) - 2px)}"
   function showSideNav() {
@@ -244,11 +244,11 @@
       return
     }
     if (!$("#v2min_sideNav")) {
-      const sideNav = addElement(document.body, "div", {
+      const sideNav = addElement2(document.body, "div", {
         id: "v2min_sideNav",
         style: "display: none",
       })
-      addElement(sideNav, "button", {
+      addElement2(sideNav, "button", {
         class: "fa fa-arrow-circle-up",
         title: "Back to the top",
         onclick() {
@@ -258,7 +258,7 @@
           })
         },
       })
-      addElement(sideNav, "button", {
+      addElement2(sideNav, "button", {
         class: "fa fa-comments",
         title: "Comments",
         disabled:
@@ -274,7 +274,7 @@
           })
         },
       })
-      addElement(sideNav, "button", {
+      addElement2(sideNav, "button", {
         class: "fa fa-edit",
         title: "Add comment",
         value: "AA",
@@ -284,7 +284,7 @@
           $("#reply_content").focus()
         },
       })
-      addElement(sideNav, "button", {
+      addElement2(sideNav, "button", {
         class: "fa fa-chevron-left",
         title: "Go to previous page",
         disabled: $('*[title="\u4E0A\u4E00\u9875"]') ? void 0 : true,
@@ -292,7 +292,7 @@
           $('*[title="\u4E0A\u4E00\u9875"]').click()
         },
       })
-      addElement(sideNav, "button", {
+      addElement2(sideNav, "button", {
         class: "fa fa-chevron-right",
         title: "Go to next page",
         disabled: $('*[title="\u4E0B\u4E00\u9875"]') ? void 0 : true,
@@ -300,21 +300,21 @@
           $('*[title="\u4E0B\u4E00\u9875"]').click()
         },
       })
-      addElement(sideNav, "button", {
+      addElement2(sideNav, "button", {
         class: "fa fa-bell",
         title: "Notifications",
         onclick() {
           location.href = "https://www.v2ex.com/notifications"
         },
       })
-      addElement(sideNav, "button", {
+      addElement2(sideNav, "button", {
         class: "fa fa-home",
         title: "Home",
         onclick() {
           location.href = "/"
         },
       })
-      addElement(sideNav, "button", {
+      addElement2(sideNav, "button", {
         class: "fa fa-cog",
         title: "Settings",
         onclick() {

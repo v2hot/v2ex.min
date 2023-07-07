@@ -2,7 +2,7 @@
   "name": "v2ex.min",
   "displayName": "v2ex.min - V2EX Minimalist (极简风格)",
   "displayName:zh-CN": "v2ex.min - V2EX 极简风格",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "V2EX minimalist style，简洁风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。",
   "description:zh-CN": "V2EX 极简风格，简洁风格，扁平化 UI，导航栏顶部固定，快捷按钮，去除背景图片，支持黑暗模式，去除广告，去除不必要元素，支持隐藏头像，支持自定义样式。",
   "author": "Pipecraft",
