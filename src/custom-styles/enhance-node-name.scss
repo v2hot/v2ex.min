@@ -1,0 +1,19 @@
+/**
+ * 节点显示增强
+ */
+
+/* Node name */
+#Main .box a.node {
+  color: #1ba784;
+}
+
+/* 节点，用户名显示在标题上面 */
+#Main td:has(.topic_info) {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+/* 增加主题间的间距 */
+div.cell:has(.topic_info) {
+  border-bottom: 5px solid var(--box-border-color);
+}

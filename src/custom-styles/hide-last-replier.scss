@@ -1,0 +1,9 @@
+#Main .topic_info strong:nth-of-type(2),
+#Main .topic_info .last_replier_text {
+  display: none;
+}
+
+#Main .cell:hover .topic_info strong:nth-of-type(2),
+#Main .cell:hover .topic_info .last_replier_text {
+  display: contents;
+}

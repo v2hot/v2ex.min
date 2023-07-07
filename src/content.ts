@@ -13,14 +13,14 @@ import {
   registerMenuCommand,
   removeEventListener,
 } from "browser-extension-utils"
-import enhanceNodeName from "data-text:../v2ex-custom-style/enhance-node-name.css"
-import hideLastReplier from "data-text:../v2ex-custom-style/hide-last-replier.css"
-import hideProfilePhotoStyle from "data-text:../v2ex-custom-style/hide-profile-photo.css"
-import minimalist from "data-text:../v2ex-custom-style/minimalist.css"
-import noAds from "data-text:../v2ex-custom-style/no-ads.css"
-import sideNavStyle from "data-text:../v2ex-custom-style/side-nav.scss"
-import stickyHeader from "data-text:../v2ex-custom-style/sticky-header.css"
 import styleText from "data-text:./content.scss"
+import enhanceNodeName from "data-text:./custom-styles/enhance-node-name.scss"
+import hideLastReplier from "data-text:./custom-styles/hide-last-replier.scss"
+import hideProfilePhotoStyle from "data-text:./custom-styles/hide-profile-photo.scss"
+import minimalist from "data-text:./custom-styles/minimalist.scss"
+import noAds from "data-text:./custom-styles/no-ads.scss"
+import sideNavStyle from "data-text:./custom-styles/side-nav.scss"
+import stickyHeader from "data-text:./custom-styles/sticky-header.scss"
 import type { PlasmoCSConfig } from "plasmo"
 
 import { showSideNav } from "./components/side-nav"

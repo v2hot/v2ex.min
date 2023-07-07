@@ -1,0 +1,20 @@
+/* 主题列表头像 */
+#Main td:has(a > img.avatar),
+#Main td:has(a > img.avatar) + td[width="10"],
+#Main td[width="48"],
+#Main td[width="48"] + td[width="10"],
+/* 右侧栏 */
+#TopicsHot td:has(a > img.avatar),
+#TopicsHot td:has(a > img.avatar) + td,
+#my-recent-topics td:has(a > img),
+#my-recent-topics td:has(a > img) + td,
+/* 评论区头像 */
+#Main > box > div.cell[id] td:has(img.avatar),
+#Main > box > div.cell[id] td:has(img.avatar) + td {
+  display: none !important;
+}
+
+/* user name*/
+td > strong > .dark {
+  color: #1ba784 !important;
+}

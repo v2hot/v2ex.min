@@ -1,0 +1,8 @@
+/* ads */
+.box:has(> style),
+div:has(> script),
+div:has(> .wwads-cn),
+.box:has(> .sidebar_compliance),
+div:has(> a > #DigitalOcean) {
+  display: none !important;
+}

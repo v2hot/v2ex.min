@@ -1,0 +1,42 @@
+/**
+ * 自定义隐藏
+ */
+
+/* Some tabs */
+#Tabs > a:nth-child(4),
+#Tabs > a:nth-child(5),
+#Tabs > a:nth-child(6),
+#Tabs > a:nth-child(7),
+#Tabs > a:nth-child(13) {
+  display: none;
+}
+
+#Tabs > a {
+  min-width: 3.5em;
+}
+
+/* Hide pinned topics */
+#Main > div:nth-child(2) > div[style*="corner"] {
+  display: none;
+}
+
+/* 右侧栏一些东西 */
+.box:has(#nodes-sidebar),
+#TopicsHot + div,
+#TopicsHot + div + div,
+#TopicsHot + div + div + div,
+#TopicsHot + div + div + div + div,
+#TopicsHot + div + div + div + div + div,
+#TopicsHot + div + div + div + div + div + div {
+  display: none !important;
+}
+
+/* 节点导航 */
+.box:has(a[href="/planes"]) {
+  display: none;
+}
+
+/* dark 模式开关 */
+.light-toggle {
+  display: none !important;
+}

@@ -1,0 +1,58 @@
+#Top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#Top .content {
+  max-width: unset !important;
+  width: 100% !important;
+}
+
+.site-nav .tools {
+  flex: unset;
+}
+.site-nav a[name="top"] {
+  margin-right: auto;
+}
+
+#Wrapper::before {
+  content: "";
+  display: block;
+  height: 44px;
+}
+
+/* v2hot */
+#placeholder {
+  height: 38px;
+}
+
+#Tabs {
+  position: fixed;
+  top: 1px;
+  padding: 9px;
+  border: none;
+}
+
+#search-container {
+  width: 100px;
+}
+#search-container:has(input:focus) {
+  width: 300px;
+}
+
+body:has(input:focus) #Tabs {
+  display: none;
+}
+
+/* 屏幕宽度小时，隐藏 logo */
+@media only screen and (max-width: 1300px) {
+  .site-nav a[name="top"] {
+    visibility: hidden;
+  }
+}
+
+* {
+  scroll-margin-top: 44px;
+}
