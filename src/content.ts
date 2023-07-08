@@ -1,19 +1,18 @@
 import {
-  addValueChangeListener,
-  getValue,
-  setValue,
-} from "browser-extension-storage"
+  getSettingsValue,
+  initSettings,
+  resetSattingsValues,
+  saveSattingsValues,
+  showSettings,
+} from "browser-extension-settings"
 import {
   $,
   $$,
   addElement,
   addEventListener,
-  addStyle,
   createElement,
   registerMenuCommand,
-  removeEventListener,
 } from "browser-extension-utils"
-import styleText from "data-text:./content.scss"
 import enhanceNodeName from "data-text:./custom-styles/enhance-node-name.scss"
 import hideLastReplier from "data-text:./custom-styles/hide-last-replier.scss"
 import hideProfilePhotoStyle from "data-text:./custom-styles/hide-profile-photo.scss"
@@ -24,7 +23,6 @@ import stickyHeader from "data-text:./custom-styles/sticky-header.scss"
 import type { PlasmoCSConfig } from "plasmo"
 
 import { showSideNav } from "./components/side-nav"
-import { createSwitchOption } from "./components/switch"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://*.v2ex.com/*", "https://v2hot.pipecraft.net/*"],
@@ -73,152 +71,65 @@ const settingsTable = {
     title: "自定义样式",
     defaultValue: false,
   },
-}
-let settings = {}
-export function getSettingsValue(key: string): boolean | undefined {
-  return Object.hasOwn(settings, key)
-    ? settings[key]
-    : settingsTable[key]?.defaultValue
-}
-
-function registerMenuCommands() {
-  registerMenuCommand("⚙️ 设置", showSettings, "o")
-}
-
-const modalHandler = (event) => {
-  let target = event.target as HTMLElement
-  const settingsLayer = $("#v2min_settings")
-  if (settingsLayer) {
-    while (target !== settingsLayer && target) {
-      target = target.parentNode as HTMLElement
-    }
-
-    if (target === settingsLayer) {
-      return
-    }
-
-    settingsLayer.style.display = "none"
-    removeEventListener(document, "click", modalHandler)
-  }
-}
-
-async function updateOptions() {
-  if (!$("#v2min_settings")) {
-    return
-  }
-
-  for (const key in settingsTable) {
-    if (Object.hasOwn(settingsTable, key)) {
-      const checkbox = $(
-        `#v2min_settings .option_groups .switch_option[data-key=${key}] input`
-      )
-      if (checkbox) {
-        checkbox.checked = getSettingsValue(key)
-      }
-    }
-  }
-
-  $(`#v2min_settings .option_groups:nth-of-type(2)`).style.display =
-    getSettingsValue("customStyle") ? "block" : "none"
-
-  const customStyleValue = $(`#v2min_settings .option_groups textarea`)
-  customStyleValue.value = settings.customStyleValue || ""
-}
-
-export async function showSettings() {
-  let settingsLayer = $("#v2min_settings")
-  if (!settingsLayer) {
-    addStyle(styleText)
-    settingsLayer = addElement(document.body, "div", {
-      id: "v2min_settings",
-    })
-
-    addElement(settingsLayer, "h2", { textContent: "v2ex.min" })
-
-    const options = addElement(settingsLayer, "div", { class: "option_groups" })
-    for (const key in settingsTable) {
-      if (Object.hasOwn(settingsTable, key)) {
-        const item = settingsTable[key]
-        const switchOption = createSwitchOption(item.title, {
-          async onchange(event) {
-            const settings = await getSettings()
-            settings[key] = event.target.checked
-            await setValue("settings", settings)
-          },
-        })
-
-        switchOption.dataset.key = key
-
-        addElement(options, switchOption)
-      }
-    }
-
-    const options2 = addElement(settingsLayer, "div", {
-      class: "option_groups",
-    })
-    let timeoutId
-    addElement(options2, "textarea", {
-      class: "custom_style",
-      placeholder: `/* 自定义样式 */
+  customStyleValue: {
+    title: "Enable custom rules for the current site",
+    defaultValue: "",
+    placeholder: `/* 自定义样式 */
 body #Wrapper {
   background-color: #f0f0f0;
 }
 body #Wrapper.Night {
   background-color: #22303f;
 }`,
-      onkeyup(event) {
-        if (timeoutId) {
-          clearTimeout(timeoutId)
-          timeoutId = null
-        }
+    type: "textarea",
+    group: 2,
+  },
+  customStyleTip: {
+    title: "Examples",
+    type: "tip",
+    tipContent: `<p>自定义样式示例</p>
+<p>
+<pre>
+body #Wrapper {
+  background-color: #f0f0f0;
+}
+/* 黑暗模式 */
+body #Wrapper.Night {
+  background-color: #22303f;
+}</pre>
+</p>`,
+    group: 2,
+  },
+  resetAll: {
+    title: "重置所有设置",
+    type: "action",
+    async onclick() {
+      await resetSattingsValues()
+    },
+    group: 3,
+  },
+  resetToV2ex: {
+    title: "恢复 V2EX 默认样式",
+    type: "action",
+    async onclick() {
+      await saveSattingsValues({
+        enhanceNodeName: false,
+        hideNodeList: false,
+        stickyHeader: false,
+        bodyBackgroundColor: false,
+        minimalist: false,
+        hidePinnedTopics: false,
+        hideProfilePhoto: false,
+        customStyle: false,
+        showSideNav: false,
+      })
+    },
+    group: 3,
+  },
+}
 
-        timeoutId = setTimeout(async () => {
-          const settings = await getSettings()
-          settings.customStyleValue = event.target.value
-          await setValue("settings", settings)
-        }, 1000)
-      },
-    })
-
-    const options3 = addElement(settingsLayer, "div", {
-      class: "option_groups",
-    })
-    addElement(options3, "a", {
-      class: "action",
-      textContent: "重置所有设置",
-      async onclick() {
-        await setValue("settings", {})
-      },
-    })
-    addElement(options3, "a", {
-      class: "action",
-      textContent: "恢复 V2EX 默认样式",
-      async onclick() {
-        await setValue("settings", {
-          enhanceNodeName: false,
-          hideNodeList: false,
-          stickyHeader: false,
-          bodyBackgroundColor: false,
-          minimalist: false,
-          hidePinnedTopics: false,
-          hideProfilePhoto: false,
-          customStyle: false,
-          showSideNav: false,
-        })
-      },
-    })
-
-    const footer = addElement(settingsLayer, "footer")
-    footer.innerHTML = `Made with ❤️ by
-    <a href="https://www.pipecraft.net/" target="_blank">
-      Pipecraft
-    </a>`
-  }
-
-  await updateOptions()
-  settingsLayer.style.display = "block"
-
-  addEventListener(document, "click", modalHandler)
+function registerMenuCommands() {
+  registerMenuCommand("⚙️ 设置", showSettings, "o")
 }
 
 async function addStyles() {
@@ -327,7 +238,7 @@ async function addStyles() {
     })
   }
 
-  const customStyleValue = settings.customStyleValue || ""
+  const customStyleValue = getSettingsValue("customStyleValue") || ""
   if (getSettingsValue("customStyle") && customStyleValue) {
     if ($("#v2min_custom_style")) {
       $("#v2min_custom_style").textContent = customStyleValue
@@ -345,27 +256,41 @@ async function addStyles() {
   if ($("#Tabs")) $("#Tabs").style.display = "block"
 }
 
-async function getSettings() {
-  return (
-    ((await getValue("settings")) as Record<string, unknown> | undefined) ?? {}
-  )
-}
-
 async function main() {
   if (document["v2ex.min"]) {
     return
   }
 
   document["v2ex.min"] = true
-  registerMenuCommands()
 
-  addValueChangeListener("settings", async () => {
-    settings = await getSettings()
-    await addStyles()
-    await updateOptions()
+  await initSettings({
+    id: "v2ex.min",
+    title: "v2ex.min - V2EX Minimalist (极简风格)",
+    footer: `
+    <p>
+    <a href="https://github.com/v2hot/v2ex.min/issues" target="_blank">
+    Report and Issue...
+    </a></p>
+    <p>Made with ❤️ by
+    <a href="https://www.pipecraft.net/" target="_blank">
+      Pipecraft
+    </a></p>`,
+    settingsTable,
+    async onValueChange() {
+      await addStyles()
+    },
+    onViewUpdate(settingsMainView) {
+      const group2 = $(`.option_groups:nth-of-type(2)`, settingsMainView)
+      if (group2) {
+        group2.style.display = getSettingsValue(`customStyle`)
+          ? "block"
+          : "none"
+      }
+    },
   })
 
-  settings = await getSettings()
+  registerMenuCommands()
+
   await addStyles()
   addEventListener(document, "DOMContentLoaded", addStyles)
 }

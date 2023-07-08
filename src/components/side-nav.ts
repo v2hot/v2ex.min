@@ -1,6 +1,5 @@
+import { getSettingsValue, showSettings } from "browser-extension-settings"
 import { $, addElement } from "browser-extension-utils"
-
-import { getSettingsValue, showSettings } from "../content"
 
 export function showSideNav() {
   if (!document.body) {
