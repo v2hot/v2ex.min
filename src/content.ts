@@ -12,6 +12,8 @@ import {
   addEventListener,
   createElement,
   registerMenuCommand,
+  runWhenBodyExists,
+  runWhenHeadExists,
 } from "browser-extension-utils"
 import enhanceNodeName from "data-text:./custom-styles/enhance-node-name.scss"
 import hideLastReplier from "data-text:./custom-styles/hide-last-replier.scss"
@@ -176,7 +178,7 @@ async function addStyles() {
 
   if (getSettingsValue("showSideNav")) {
     styles.push(sideNavStyle)
-    showSideNav()
+    runWhenBodyExists(showSideNav)
   }
 
   if (getSettingsValue("hidePinnedTopics")) {
@@ -291,7 +293,7 @@ async function main() {
 
   registerMenuCommands()
 
-  await addStyles()
+  runWhenHeadExists(addStyles)
   addEventListener(document, "DOMContentLoaded", addStyles)
 }
 
